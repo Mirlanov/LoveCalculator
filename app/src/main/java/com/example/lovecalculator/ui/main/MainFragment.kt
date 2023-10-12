@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
-import com.example.lovecalculator.remote.LoveModel
+import com.example.lovecalculator.model.LoveModel
 import com.example.lovecalculator.R
-import com.example.lovecalculator.RetrofitService
+import com.example.lovecalculator.model.RetrofitService
 import com.example.lovecalculator.databinding.FragmentMainBinding
 import retrofit2.Call
 import retrofit2.Callback
