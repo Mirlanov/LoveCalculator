@@ -15,5 +15,6 @@ data class LoveModel(
     @SerializedName("sname")
     val secondName: String,
     val percentage: String,
-    val result: String
+    val result: String,
+    val date: String
 ) : Serializable

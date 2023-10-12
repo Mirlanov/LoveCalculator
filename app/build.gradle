@@ -68,4 +68,13 @@ dependencies {
     //Di Hilt
     implementation "com.google.dagger:hilt-android:2.47"
     kapt "com.google.dagger:hilt-compiler:2.47"
+
+    //View-Pager
+    implementation("com.viewpagerindicator:library:2.4.1")
+
+    //Indicator
+    implementation("me.relex:circleindicator:2.1.6")
+
+    //Glide
+    implementation("com.github.bumptech.glide:glide:4.15.1")
 }

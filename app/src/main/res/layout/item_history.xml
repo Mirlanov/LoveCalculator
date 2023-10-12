@@ -68,5 +68,6 @@
         android:layout_height="wrap_content"
         android:text=" = "
         android:textSize="38sp"
-        app:layout_constraintStart_toEndOf="@id/ll" />
+        app:layout_constraintStart_toEndOf="@id/ll"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

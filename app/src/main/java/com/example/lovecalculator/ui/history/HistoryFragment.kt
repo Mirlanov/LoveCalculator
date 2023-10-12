@@ -10,7 +10,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.lovecalculator.App
 import com.example.lovecalculator.R
 import com.example.lovecalculator.databinding.FragmentHistoryBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HistoryFragment : Fragment() {
 
     private lateinit var binding: FragmentHistoryBinding
@@ -20,7 +22,7 @@ class HistoryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHistoryBinding.inflate(layoutInflater)
         return binding.root
     }
