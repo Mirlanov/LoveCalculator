@@ -1,26 +1,24 @@
 package com.example.lovecalculator.ui.history
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.lovecalculator.App
 import com.example.lovecalculator.R
 import com.example.lovecalculator.databinding.FragmentHistoryBinding
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.lovecalculator.model.LoveModel
+import com.example.lovecalculator.ui.history.adapter.HistoryAdapter
 
-@AndroidEntryPoint
 class HistoryFragment : Fragment() {
-
     private lateinit var binding: FragmentHistoryBinding
-
-    private val adapter = HistoryAdapter()
-
+    private val adapter = HistoryAdapter(this::onLongClick, this::onClick)
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHistoryBinding.inflate(layoutInflater)
@@ -30,22 +28,34 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.adapter = adapter
-        setData()
-        initClickers()
-    }
-
-    private fun initClickers() {
-        with(binding){
-            ivHome.setOnClickListener {
-                findNavController().navigate(R.id.mainFragment)
-            }
-            ivHistory.findNavController().navigate(R.id.historyFragment)
+        val data = App.appDatabase.loveDao().getAll()
+        adapter.addItems(data)
+        binding.backBtn.setOnClickListener {
+            findNavController().navigate(R.id.navigation_home)
         }
     }
 
-    private fun setData() {
-        val data = App.appDatabase.loveDao().getAll()
-        adapter.addHistory(data)
+    private fun onClick(item: LoveModel){
+        val alert = AlertDialog.Builder(requireContext())
+            .setTitle("Информация")
+            .setMessage("Дата создания:")
+        alert.create().show()
+    }
 
+    private fun onLongClick(item: LoveModel) {
+        val alert = AlertDialog.Builder(requireContext())
+            .setTitle("Вы хотите удалить?")
+            .setPositiveButton("Да"){_, _ ->
+                App.appDatabase.loveDao().delete(item)
+                setData()
+            }
+            .setNegativeButton("Нет"){dialog, _ -> dialog.dismiss()
+            }
+        alert.create().show()
+    }
+
+    private fun setData(){
+        val data = App.appDatabase.loveDao().getAll()
+        adapter.addItems(data)
     }
 }

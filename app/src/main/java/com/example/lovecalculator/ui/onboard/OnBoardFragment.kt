@@ -24,7 +24,7 @@ class OnBoardFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentOnBoardBinding.inflate(layoutInflater)
         return binding.root
     }
